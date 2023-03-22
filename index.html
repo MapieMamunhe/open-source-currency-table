@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency table</title>
+  </head>
+  <body>
+    <h1>Currency Table</h1>
+    <table border="2">
+      <tr>
+        <th>Moeda</th>
+        <th>Compra (MZN)</th>
+        <th>Venda (MZN)</th>
+      </tr>
+      <tbody></tbody>
+    </table>
+    <script>
+      async function currencyData() {
+        const fetchedData = await fetch(
+          "https://economia.awesomeapi.com.br/json/last/USD-MZN,EUR-MZN/"
+        )
+          .then((response) => response.json())
+          .then((data) => data);
+        const table = document.querySelector("table tbody");
+        console.log(fetchedData, table);
+        for (let element in fetchedData) {
+          table.innerHTML += `<tr>
+                    <td>${fetchedData[element].code}</td>
+                    <td>${fetchedData[element].bid}</td>
+                    <td>${fetchedData[element].ask}</td>
+                <tr>`;
+        }
+      }
+      currencyData();
+    </script>
+    <footer style="display: flex; flex-direction: column; margin-top: 20%">
+      <span>
+        Visite meu Linkedin
+        <a href="https://linkedin.com/in/Mamunhe" target="_blank"
+          >Clicando aqui</a
+        >
+      </span>
+      <span>
+        Ou meu Github
+        <a href="https://github.com/MapieMamunhe" target="_blank"
+          >Clicando aqui</a
+        >
+      </span>
+      <span style="margin-top: 5px">
+        Made By
+        <strong>Mapie Victorino Mamunhe</strong>
+      </span>
+    </footer>
+  </body>
+</html>
